@@ -43,14 +43,11 @@ const ObrasScreen = () => {
   };
 
   return (
+    <ScrollView contentContainerStyle={styles.scrollViewContent} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}>
+           <Header /> 
     <View style={styles.fondo}>
-      <Header /> 
-      <ScrollView
-        contentContainerStyle={styles.scrollViewContent}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-        }
-      >
+ 
+      
         <SearchBar />
         <View style={styles.content}>
           {obras.map((obra) => (
@@ -77,8 +74,9 @@ const ObrasScreen = () => {
             </View>
           ))}
         </View>
-      </ScrollView>
+  
     </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
