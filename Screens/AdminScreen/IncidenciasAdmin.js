@@ -13,7 +13,8 @@ const IncidenciasAdmin = ({ route }) => {
     { day: 'Miércoles', value: 'miercoles' },
     { day: 'Jueves', value: 'jueves' },
     { day: 'Viernes', value: 'viernes' },
-    { day: 'Sábado', value: 'sabado' },
+    { day: 'Sabado', value: 'sabado' },
+    { day: 'Domingo', value: 'domingo' },
   ];
 
   const renderDayButtonIncidencias = ({ item }) => ( // Función de renderizado de botones de día para incidencias

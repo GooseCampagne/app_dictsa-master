@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Modal, Pressable, Alert } from 'react-native';
 import axios from 'axios';
 import { ScrollView } from 'react-native';
+import Header from '../../components/Header';
+
 
 const EditUser = ({ route, navigation }) => {
   const { workerid } = route.params;
@@ -92,7 +94,9 @@ const EditUser = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      
         <ScrollView>
+        <Header /> 
       <View style={styles.form}>
         <Text style={styles.formText}>Nombre</Text>
         <TextInput
@@ -140,18 +144,19 @@ const EditUser = ({ route, navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleCancelar}>
-          <View style={styles.buttonCancelar}>
-            <Text style={styles.buttonText2}>
-              CANCELAR
-            </Text>
-          </View>
-        </TouchableOpacity>
-
         <TouchableOpacity onPress={handleEliminarUsuario}>
           <View style={styles.buttonEliminar}>
             <Text style={styles.buttonText2}>
               ELIMINAR USUARIO
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+
+        <TouchableOpacity onPress={handleCancelar}>
+          <View style={styles.buttonCancelar}>
+            <Text style={styles.buttonText2}>
+              CANCELAR
             </Text>
           </View>
         </TouchableOpacity>

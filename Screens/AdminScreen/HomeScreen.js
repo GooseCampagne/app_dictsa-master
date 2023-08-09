@@ -6,8 +6,6 @@ import Header from '../../components/Header';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
-
 const ObrasScreen = () => {
   const [obras, setObras] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
@@ -32,6 +30,10 @@ const ObrasScreen = () => {
     navigation.navigate('Avances', { obraId });
   };
 
+  const handleEditIconPress = (obraId) => {
+    navigation.navigate('Avances', { obraId });
+  };
+
   // Manejar la acción de refrescar
   const handleRefresh = () => {
     setRefreshing(true);
@@ -41,8 +43,8 @@ const ObrasScreen = () => {
   };
 
   return (
-    <View>
-      {/* <Header /> */}
+    <View style={styles.fondo}>
+      <Header /> 
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         refreshControl={
@@ -59,7 +61,12 @@ const ObrasScreen = () => {
               >
                 <View style={styles.insideCard}>
                   <Text style={styles.title}>{obra.nombre_obra}</Text>
-                  <Icon name="edit" size={20} color="black" style={styles.usericonright} />
+                  <TouchableOpacity
+                    style={styles.usericonright}
+                    onPress={() => handleEditIconPress(obra.id_obra)} // Manejar el toque del ícono "edit"
+                  >
+                    <Icon name="edit" size={25} color="black" />
+                  </TouchableOpacity>
                 </View>
                 
                 <Text style={styles.data}>Encargado: {obra.encargado}</Text>
@@ -93,12 +100,16 @@ const styles = StyleSheet.create({
     height: 160,
     marginTop: 10,
     marginLeft: 6,
-    marginRight: 6
+    marginRight: 6,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: 'white'
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 5,
+    color: 'black'
   },
   content: {
     flexGrow: 1,
@@ -113,15 +124,20 @@ const styles = StyleSheet.create({
     height: 30,
     position: 'absolute',
     borderRadius: 5,
-    borderBottomWidth: 2
+    borderBottomWidth: 2,
+    borderColor: 'black'
   },
   data:{
     fontSize: 15,
-    fontWeight: '500'
+    fontWeight: '500',
+    color: 'black'
   },
   usericonright:{
     position: 'absolute',
     right: 3
+  },
+  fondo:{
+    
   }
 });
 

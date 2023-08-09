@@ -31,7 +31,7 @@ const SearchBar = () => {
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: '1.5%',
-    marginTop: 30,
+    marginTop: 10,
   },
   searchBar: {
     flexDirection: 'row',
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 2,
   },
   addButton: {

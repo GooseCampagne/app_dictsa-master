@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import Header from '../../components/Header';
+
 
 const Incidencias = () => {
   const [obras, setObras] = useState([]);
@@ -28,8 +30,9 @@ const Incidencias = () => {
 
   return (
     <View>
-      {/* <Header /> */}
+ 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <Header /> 
         <View style={styles.content}>
           {obras.map((obra) => (
             <View key={obra.id_obra} style={styles.card}>

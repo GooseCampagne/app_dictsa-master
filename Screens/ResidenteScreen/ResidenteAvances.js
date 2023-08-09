@@ -3,6 +3,8 @@ import { StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity, Keyboa
 import axios from 'axios';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
+import Header from '../../components/Header';
+
 
 const diasSemana = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO', 'DOMINGO'];
 
@@ -69,14 +71,14 @@ const ResidenteAvances = () => {
       aspect: [4, 3],
       quality: 1,
     });
-
+  
     console.log(result);
-
-    if (!result.cancelled) {
-      setImage1(result.uri);
+  
+    if (!result.canceled) {
+      setImage1(result.assets[0].uri); // Use the "assets" array to access the selected image
     }
   };
-
+  
   const pickImage2 = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -84,11 +86,11 @@ const ResidenteAvances = () => {
       aspect: [4, 3],
       quality: 1,
     });
-
+  
     console.log(result);
-
-    if (!result.cancelled) {
-      setImage2(result.uri);
+  
+    if (!result.canceled) {
+      setImage2(result.assets[0].uri); // Use the "assets" array to access the selected image
     }
   };
 
@@ -103,7 +105,9 @@ const ResidenteAvances = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+    
+    <KeyboardAvoidingView style={[styles.container, { backgroundColor: 'white' }]} behavior="padding" enabled>
+      <Header /> 
       <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
       <Text style={styles.TextInput}>Dia: </Text>
         <TouchableOpacity onPress={() => setShowModalDia(true)}>
@@ -204,14 +208,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     backgroundColor: '#fff',
     borderRadius: 5,
-    padding: 10,
-    marginVertical: 9,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 2,
-    marginHorizontal: '3.5%', // 85% de margen en total (7.5% a cada lado)
+
   },
   scrollContainer: {
     flexGrow: 1,

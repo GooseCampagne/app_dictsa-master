@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert, ImageBackground, Image } from 'react-native';
 import axios from 'axios';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -56,10 +56,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground
-      source={require('../../assets/loginbackground.png')}
-      style={styles.background}
-    >
+ 
       <View style={styles.container}>
         <View style={styles.gradient} />
         <View style={styles.titleContainer}>
@@ -96,7 +93,7 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.buttonText}>Iniciar sesión</Text>
         </TouchableOpacity>
       </View>
-    </ImageBackground>
+
   );
 };
 
@@ -106,7 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: 'transparent'
+    backgroundColor: '#1A1A1A'
   },
   titleContainer: {
     flex: 1,
@@ -119,7 +116,10 @@ const styles = StyleSheet.create({
   Title: {
     fontSize: 55,
     fontWeight: '600',
-    color: 'white'
+    color: 'white',
+    textShadowColor: 'rgba(255, 255, 255, 0.7)', // Color y opacidad de la sombra
+    textShadowOffset: { width: 0, height: 1 }, // Desplazamiento de la sombra en píxeles
+    textShadowRadius: 10, // Radio de la difuminación de la sombra
   },
   input: {
     width: '100%',
@@ -137,15 +137,17 @@ const styles = StyleSheet.create({
   button: {
     width: '100%',
     height: 50,
-    backgroundColor: '#007AFF',
+    backgroundColor: 'black',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.4,
     shadowRadius: 5,
-    marginTop: 10
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: 'white'
   },
   buttonText: {
     color: 'white',

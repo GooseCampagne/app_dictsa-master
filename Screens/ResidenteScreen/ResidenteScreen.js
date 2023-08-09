@@ -31,28 +31,36 @@ const ResidenteScreen = ({ route }) => {
 
   return (
     <ScrollView>
-
-      {obra.map((obra) => (
-        <TouchableOpacity
-          key={obra.id}
-          onPress={() => handleObraPress(obra.id_obra)} // Modificada la línea para pasar el id_obra
-        >
-          <View style={styles.card}>
-            <Text style={styles.title}>{obra.nombre_obra}</Text>
-            <Text>Encargado: {obra.encargado}</Text>
-            <Text>Fecha de inicio: {obra.fecha_inicio}</Text>
-            <Text>Fecha de cierre: {obra.fecha_cierre}</Text>
-            <Text>Status: {obra.status}</Text>
-          </View>
-        </TouchableOpacity>
-      ))}
-      <TouchableOpacity style={styles.buttonContainer} onPress={handleProfile}>
-          <View style={styles.Button}>
-            <Text style={styles.buttonText}>Perfil</Text>
-          </View>
-        </TouchableOpacity>
-    </ScrollView>
-  );
+    <Header /> 
+    {obra.map((obraItem) => (
+      <TouchableOpacity
+        key={obraItem.id}
+        onPress={() => handleObraPress(obraItem.id_obra)}
+      >
+        <View key={`obra-${obraItem.id}`} style={styles.card}>
+          <Text style={styles.title}>{obraItem.nombre_obra}</Text>
+          <Text>
+            Encargado: <Text>{obraItem.encargado}</Text>
+          </Text>
+          <Text>
+            Fecha de inicio: <Text>{obraItem.fecha_inicio}</Text>
+          </Text>
+          <Text>
+            Fecha de cierre: <Text>{obraItem.fecha_cierre}</Text>
+          </Text>
+          <Text>
+            Status: <Text>{obraItem.status}</Text>
+          </Text>
+        </View>
+      </TouchableOpacity>
+    ))}
+    <TouchableOpacity style={styles.buttonContainer} onPress={handleProfile}>
+      <View style={styles.Button}>
+        <Text style={styles.buttonText}>Perfil</Text>
+      </View>
+    </TouchableOpacity>
+  </ScrollView>
+);
 };
 
 export default ResidenteScreen

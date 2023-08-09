@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
+import Header from '../../components/Header';
+
 
 const ChangePassword = ({ route }) => {
   const { workerid } = route.params;
@@ -24,6 +26,7 @@ const ChangePassword = ({ route }) => {
 
   return (
     <View style={styles.container}>
+      <Header /> 
       <View style={styles.formContainer}>
         <Text style={styles.text}>Cambiar contraseña</Text>
         <TextInput
@@ -51,6 +54,7 @@ const styles = StyleSheet.create({
         width: '99%',
         height: 500,
         paddingStart: 5
+      
         
     },
     input:{
@@ -64,9 +68,10 @@ const styles = StyleSheet.create({
     },
     text:{
         fontWeight: '700',
-        fontSize: '20',
+        fontSize: 20,
         textAlign: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+        marginTop: 10
     },
     Button:{
         width: 180,

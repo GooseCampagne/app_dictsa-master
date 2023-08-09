@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import Header from '../../components/Header';
 
 const RhScreen = () => {
   const navigation = useNavigation();
@@ -22,6 +22,7 @@ const RhScreen = () => {
   };
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
+    <Header /> 
     <View style={styles.container}>
       {/* <Text style={styles.WelcomeText}>Bienvenido al sistema DiCTSA</Text>
       <Text style={styles.WelcomeText2}>Administra las incidencias de los residentes!, agrega o eliminalos!</Text> */}

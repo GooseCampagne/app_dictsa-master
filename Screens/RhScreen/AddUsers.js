@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Modal, Pressable, Alert, BackHandler, ScrollView } from 'react-native';
 import axios from 'axios';
+import Header from '../../components/Header';
+
 
 const AddUsers = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -53,8 +55,12 @@ const AddUsers = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
+   
+     
+    <ScrollView>
+      <Header /> 
+     <View style={styles.container}>
+     
       <View style={styles.form}>
         <Text style={styles.formText}>Nombre</Text>
         <TextInput
@@ -139,8 +145,8 @@ const AddUsers = ({ navigation }) => {
           </View>
         </Modal>
       </View>
-      </ScrollView>
     </View>
+  </ScrollView>
   );
 };
 
@@ -158,10 +164,10 @@ const styles = StyleSheet.create({
         width: '99%',
         height: '94%',
         paddingHorizontal: 5,
-        paddingVertical: 5
+        paddingVertical: 15
     },
     container:{
-        paddingHorizontal: 5,
+        paddingHorizontal: 0,
     },
     input:{
       width: '100%',

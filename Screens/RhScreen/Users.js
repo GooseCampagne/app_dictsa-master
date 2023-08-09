@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, ScrollView, RefreshControl } 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import Header from '../../components/Header';
 
 const Users = () => {
   const navigation = useNavigation();
@@ -40,13 +41,14 @@ const Users = () => {
     <ScrollView style={styles.container} refreshControl={
       <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
     }>
+      <Header /> 
       {users.map((user) => (
+        <TouchableOpacity key={user.workerid} onPress={() => handleEditUser(user.workerid)}>
           <View style={styles.cardContent}>
-             <TouchableOpacity key={user.workerid} onPress={() => handleEditUser(user.workerid)}>
             <Icon name="edit" size={20} color="black" style={styles.editIcon} />
-            </TouchableOpacity>
             <Text style={styles.usuarioscardtext}>{user.nombre} {user.Apellido_paterno} {user.Apellido_materno}</Text>
           </View>
+        </TouchableOpacity>
       ))}
     </ScrollView>
   );

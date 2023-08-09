@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Button } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import Header from '../../components/Header';
 
 const AvancesScreen = ({ route }) => {
   const [avances, setAvances] = useState([]);
   const { obraId } = route.params;
-  const [selectedDayAvances, setSelectedDayAvances] = useState(''); // Nuevo estado para el día seleccionado en avances
-  const [selectedDayIncidencias, setSelectedDayIncidencias] = useState(''); // Nuevo estado para el día seleccionado en incidencias
+  const [selectedDayAvances, setSelectedDayAvances] = useState('');
+  const [selectedDayIncidencias, setSelectedDayIncidencias] = useState('');
   const navigation = useNavigation();
   const [incidencias, setIncidencias] = useState([]);
- 
-
-
 
   useEffect(() => {
     fetchAvances();
     fetchIncidencias();
   }, []);
-
 
   const fetchAvances = async () => {
     try {
@@ -39,10 +36,6 @@ const AvancesScreen = ({ route }) => {
       console.error('Error al obtener las incidencias:', error);
     }
   };
-// Redireccionar a la pantalla de avances
-const handleIncidencias = () => {
-  navigation.navigate('incidenciasAdmin', { obraId });
-};
 
   const daysOfWeek = [
     { day: 'Lunes', value: 'lunes' },
@@ -54,7 +47,7 @@ const handleIncidencias = () => {
     { day: 'Domingo', value: 'domingo' },
   ];
 
-  const renderDayButtonAvances = ({ item }) => ( // Función de renderizado de botones de día para avances
+  const renderDayButtonAvances = ({ item }) => (
     <TouchableOpacity
       style={[
         styles.dayButton,
@@ -73,7 +66,7 @@ const handleIncidencias = () => {
     </TouchableOpacity>
   );
 
-  const renderDayButtonIncidencias = ({ item }) => ( // Función de renderizado de botones de día para incidencias
+  const renderDayButtonIncidencias = ({ item }) => (
     <TouchableOpacity
       style={[
         styles.dayButton,
@@ -94,10 +87,9 @@ const handleIncidencias = () => {
 
   return (
     <View style={styles.container}>
+      <Header /> 
+      <Text style={styles.heading}>Avances</Text>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <Text style={styles.heading}>Avances</Text>
-        {/* Render day buttons */}
-        
         <FlatList
           horizontal
           data={daysOfWeek}
@@ -105,13 +97,10 @@ const handleIncidencias = () => {
           keyExtractor={(item) => item.value}
           showsHorizontalScrollIndicator={false}
         />
-        
-        {/* Render avances */}
         {avances
           .filter((avance) => avance.dia_semana.toLowerCase() === selectedDayAvances)
           .map((avance) => (
             <View key={avance.id_avance} style={styles.card}>
-              {/* Render avance details */}
               <Text style={styles.text}>Avances del día {avance.dia_semana}</Text>
               <View style={styles.detailsContainer}>
                 <Text style={styles.title}>Tarea:</Text>
@@ -127,7 +116,6 @@ const handleIncidencias = () => {
               </View>
             </View>
           ))}
-        {/* Render incidencias */}
         <Text style={styles.heading}>Incidencias</Text>
         <FlatList
           horizontal
@@ -137,31 +125,27 @@ const handleIncidencias = () => {
           showsHorizontalScrollIndicator={false}
         />
         {incidencias
-        .filter((incidencia) => incidencia.dia.toLowerCase() === selectedDayIncidencias)
-        .map((incidencia) => (
-          <View style={styles.card}>
-            <Text style={styles.text}>Incidencia</Text>
-            <View style={styles.detailsContainer}>
-              <Text style={styles.title}>Dia:</Text>
-              <Text style={styles.cardMaterials}>{incidencia.dia}</Text>
-              <Text style={styles.title}>Fecha:</Text>
-              <Text style={styles.cardMaterials}>{incidencia.fecha}</Text>
-              <Text style={styles.title}>Nombre:</Text>
-              <Text style={styles.cardMaterials}>{incidencia.nombre}</Text>
-              <Text style={styles.title}>cod:</Text>
-              <Text style={styles.cardMaterials}>{incidencia.cod}</Text>
+          .filter((incidencia) => incidencia.dia.toLowerCase() === selectedDayIncidencias)
+          .map((incidencia) => (
+            <View key={incidencia.id} style={styles.card}>
+              <Text style={styles.text}>Incidencia</Text>
+              <View style={styles.detailsContainer}>
+                <Text style={styles.title}>Dia:</Text>
+                <Text style={styles.cardMaterials}>{incidencia.dia}</Text>
+                <Text style={styles.title}>Fecha:</Text>
+                <Text style={styles.cardMaterials}>{incidencia.fecha}</Text>
+                <Text style={styles.title}>Nombre:</Text>
+                <Text style={styles.cardMaterials}>{incidencia.nombre}</Text>
+                <Text style={styles.title}>cod:</Text>
+                <Text style={styles.cardMaterials}>{incidencia.cod}</Text>
+              </View>
             </View>
-          </View>
-        ))}
+          ))}
       </ScrollView>
-      {/* <Button
-        style={styles.buttonagregar}
-        title="Ver incidencias: "
-        onPress={handleIncidencias}
-      /> */}
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -169,13 +153,13 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     flexGrow: 0,
-    alignItems: 'center',
-    paddingTop: 20,
   },
   heading: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 20,
+    marginTop: 10
+
   },
   dayButton: {
     paddingHorizontal: 10,

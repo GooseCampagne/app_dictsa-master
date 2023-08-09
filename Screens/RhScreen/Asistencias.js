@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView,} from 're
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-
+import Header from '../../components/Header';
 const Asistencias = ({ route }) => {
   const { obraId } = route.params;
   const [nombre, setNombre] = useState('');
@@ -43,6 +43,7 @@ const Asistencias = ({ route }) => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <Header /> 
       <View style={styles.form}>
         <TextInput
           style={styles.input}
@@ -78,7 +79,7 @@ const Asistencias = ({ route }) => {
         <TextInput
           style={styles.input}
           placeholder='Obra (el espacio se rellena automaticamente)'
-          value={obraId}
+          value={obraId.toString()} // Convert obraId to a string
           editable={false}
         />
         <Button

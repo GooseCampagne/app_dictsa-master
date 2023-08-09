@@ -18,6 +18,7 @@ import Asistencias from './Screens/RhScreen/Asistencias';
 import IncidenciasAdmin from './Screens/AdminScreen/IncidenciasAdmin';
 import imagenprueba from './Screens/ResidenteScreen/imagenprueba';
 import ChangePassword from './Screens/profile/ChangePassword';
+import EditObra from './Screens/AdminScreen/EditObra';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -26,21 +27,23 @@ export default function App() {
       <StatusBar backgroundColor="white" barStyle="dark-content" />
       <Stack.Navigator>
       <Stack.Screen  name="Login" component={LoginScreen}  options={{ title: 'Login', headerShown: false, }} />
-      <Stack.Screen  name="Residente" component={ResidenteScreen}  options={{ title: 'DiCTSA Movil', headerShown: true, }} />
+      <Stack.Screen  name="Residente" component={ResidenteScreen}  options={{ title: 'DiCTSA Movil', headerShown: false, }} />
       <Stack.Screen  name="Home" component={HomeScreen}  options={{ title: 'Admin', headerShown: false, gestureEnabled: true }} />
       <Stack.Screen  name="Avances" component={AvancesScreen}  options={{ title: 'Avances', headerShown: false, }} />
-      <Stack.Screen  name="ResidenteAvances" component={ResidenteAvances}  options={{ title: 'DiCTSA Movil', headerShown: true,}} />
-      <Stack.Screen  name="NewObra" component={NewObra}  options={{ title: 'DiCTSA Movil', headerShown: true,}} />
-      <Stack.Screen  name="rh" component={RhScreen}  options={{ title: 'Recursos Humanos', headerShown: true,}} />
-      <Stack.Screen  name="addusers" component={AddUsers}  options={{ title: 'editar', headerShown: true,}} />
-      <Stack.Screen  name="users" component={Users}  options={{ title: 'Usuarios', headerShown: true,}} />
-      <Stack.Screen  name="incidencias" component={Incidencias}  options={{ title: 'Usuarios', headerShown: true,}} />
+      <Stack.Screen  name="ResidenteAvances" component={ResidenteAvances}  options={{ title: 'DiCTSA Movil', headerShown: false,}} />
+      <Stack.Screen  name="NewObra" component={NewObra}  options={{ title: 'DiCTSA Movil', headerShown: false,}} />
+      <Stack.Screen  name="rh" component={RhScreen}  options={{ title: 'Recursos Humanos', headerShown: false,}} />
+      <Stack.Screen  name="addusers" component={AddUsers}  options={{ title: 'editar', headerShown: false,}} />
+      <Stack.Screen  name="users" component={Users}  options={{ title: 'Usuarios', headerShown: false,}} />
+      <Stack.Screen  name="incidencias" component={Incidencias}  options={{ title: 'Usuarios', headerShown: false,}} />
       <Stack.Screen  name="editUser" component={EditUser}  options={{ title: 'Usuarios', headerShown: false,}} />
       <Stack.Screen  name="addincidencias" component={AddIncidencia}  options={{ title: 'Incidencias', headerShown: true,}} />
-      <Stack.Screen  name="asistencias" component={Asistencias}  options={{ title: 'Usuarios', headerShown: true,}} />
+      <Stack.Screen  name="asistencias" component={Asistencias}  options={{ title: 'Usuarios', headerShown: false,}} />
       <Stack.Screen  name="imagenprueba" component={imagenprueba}  options={{ title: 'Usuarios', headerShown: true,}} />
-      <Stack.Screen  name="profile" component={ProfileScreen}  options={{ title: 'Usuarios', headerShown: true,}} />
-      <Stack.Screen  name="passwordReset" component={ChangePassword}  options={{ title: 'Usuarios', headerShown: true,}} />
+      <Stack.Screen  name="profile" component={ProfileScreen}  options={{ title: 'Usuarios', headerShown: false,}} />
+      <Stack.Screen  name="passwordReset" component={ChangePassword}  options={{ title: 'Usuarios', headerShown: false,}} />
+      <Stack.Screen  name="incidenciasAdmin" component={IncidenciasAdmin}  options={{ title: 'Usuarios', headerShown: true,}} />
+      <Stack.Screen  name="editobra" component={EditObra}  options={{ title: 'Usuarios', headerShown: true,}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

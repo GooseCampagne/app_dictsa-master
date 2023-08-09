@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-
+import Header from '../../components/Header';
 
 
 const ProfileScreen = ({ route }) => {
@@ -32,30 +32,32 @@ const ProfileScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-        <ScrollView>
-    <View style={styles.profileCard}>
-    <Image source={require('../../assets/pfp.png')} style={styles.pfp} />
-    </View>
-      {perfiles.map((perfil, index) => (
-        <View>
+      <Header /> 
+      <ScrollView>
+        <View style={styles.profileCard}>
+          <Image source={require('../../assets/pfp.png')} style={styles.pfp} />
+        </View>
+        {perfiles.map((perfil) => (
+          <View key={perfil.id}>
             <Text style={styles.Text}>Nombre:</Text>
-                <View style={styles.Card} >
-                    <Text >{perfil.Nombre} {perfil.Apellido_paterno} {perfil.Apellido_materno} </Text>
-                </View>
-        <Text style={styles.Text}>Numero de trabajador:</Text>
-          <View style={styles.Card}>
-          <Text>{perfil.workerid}</Text>
+            <View style={styles.Card}>
+              <Text>
+                {perfil.Nombre} {perfil.Apellido_paterno} {perfil.Apellido_materno}
+              </Text>
+            </View>
+            <Text style={styles.Text}>Numero de trabajador:</Text>
+            <View style={styles.Card}>
+              <Text>{perfil.workerid}</Text>
+            </View>
           </View>
-        </View>
-      ))}
-    <TouchableOpacity style={styles.buttonContainer} onPress={handlePasswordChange}>
-      <View style={styles.Button}>
-        <Text style={styles.buttonText}>Restablecer contraseña</Text>
-        </View>
-    </TouchableOpacity>
+        ))}
+        <TouchableOpacity style={styles.buttonContainer} onPress={handlePasswordChange}>
+          <View style={styles.Button}>
+            <Text style={styles.buttonText}>Restablecer contraseña</Text>
+          </View>
+        </TouchableOpacity>
       </ScrollView>
     </View>
-    
   );
 };
 

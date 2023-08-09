@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, TextInput, Modal, Alert, ScrollView, KeyboardAvoidingView, ImageBackground } from 'react-native';
-import LottieView from 'lottie-react-native';
 import axios from 'axios';
+import Header from '../../components/Header';
 
 const AgregarObraScreen = () => {
   const [codigoObra, setCodigoObra] = useState('');
@@ -72,16 +72,38 @@ const AgregarObraScreen = () => {
   const validateAndAutocompleteDate = (text, inputName) => {
     const formattedText = text.replace(/[^0-9/]/g, ''); // Eliminar cualquier carácter que no sea número o slash
     let autocompletedText = formattedText;
+  
     if (formattedText.length === 4 && inputName !== 'status') {
       autocompletedText += '/';
     } else if (formattedText.length === 7 && inputName !== 'status') {
-      autocompletedText += '/';
+      const year = formattedText.substring(0, 4);
+      const month = formattedText.substring(5, 7);
+      if (parseInt(month) > 0 && parseInt(month) <= 12) {
+        autocompletedText = `${year}/${month}/`;
+      } else {
+        autocompletedText = `${year}`;
+      }
+    } else if (formattedText.length > 10 && inputName !== 'status') {
+      const year = formattedText.substring(0, 4);
+      const month = formattedText.substring(5, 7);
+      const day = formattedText.substring(8, 10);
+      if (parseInt(month) > 0 && parseInt(month) <= 12 && parseInt(day) > 0 && parseInt(day) <= 31) {
+        autocompletedText = `${year}/${month}/${day}`;
+      } else if (parseInt(month) > 0 && parseInt(month) <= 12) {
+        autocompletedText = `${year}/${month}/`;
+      } else {
+        autocompletedText = `${year}`;
+      }
     }
+  
     return autocompletedText;
   };
-
+  
+  
+  
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+           <Header /> 
       <ScrollView style={styles.scrollView}>
         <View style={styles.card}>
           <Text style={styles.Text}>Codigo de la obra</Text>
@@ -98,11 +120,11 @@ const AgregarObraScreen = () => {
             value={nombreObra}
             onChangeText={setNombreObra}
           />
-          <TouchableOpacity style={styles.encargadoButton} onPress={() => {
+          <TouchableOpacity style={styles.button} onPress={() => {
             getUsers();
             setShowModalEncargado(true);
           }}>
-            <Text style={styles.encargadoButtonText}>Seleccionar Encargado</Text>
+            <Text style={styles.buttonText}>Seleccionar Encargado</Text>
           </TouchableOpacity>
           <View style={styles.selectedUserContainer}>
             {selectedUser && (
@@ -183,7 +205,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 10,
+    padding: 0,
   },
   scrollView: {
     flex: 1,
@@ -197,7 +219,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 2,
-    marginBottom: 20,
+    marginBottom: 40,
   },
   Text: {
     fontSize: 17,
@@ -245,12 +267,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   selectedUserText: {
-    fontSize: 19,
+    fontSize: 16,
     fontWeight: '700',
-    color: 'blue',
+  
   },
   modalContainer: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -260,16 +281,30 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 20,
+    marginTop: 10
   },
   userItem: {
+    width: '100%',
+    height: 55,
+    backgroundColor: 'white',
+    borderRadius: 10,
     marginBottom: 10,
+    marginTop: 5,
+    paddingHorizontal: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    paddingStart: 15,
+    justifyContent: 'center',
   },
   closeButton: {
     backgroundColor: 'red',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     marginTop: 10,
-    width: 100,
+    width: 340,
+    height: 40
   },
   closeButtonText: {
     textAlign: 'center',
@@ -286,6 +321,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
+    marginBottom: 10
   },
   buttonText: {
     color: 'white',
@@ -293,6 +329,41 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  selectedStatusContainer:{
+    width: '100%',
+    height: 45,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    marginBottom: 10,
+    marginTop: 10,
+    paddingHorizontal: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    paddingStart: 15,
+    justifyContent: 'center',
+  },
+  selectedStatusText:{
+    fontWeight: '700',
+    fontSize: 16,
+  },
+  optionButton:{
+    width: '100%',
+    height: 45,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    marginBottom: 10,
+    marginTop: 10,
+    paddingHorizontal: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    paddingStart: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
 
 export default AgregarObraScreen;
